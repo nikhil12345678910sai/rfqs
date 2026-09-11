@@ -1,0 +1,15 @@
+body {
+  background-color: #f8f9fa;
+}
+
+a {
+  text-decoration: none;
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.min-vh-75 {
+  min-height: 75vh;
+}
