@@ -3,6 +3,9 @@ Django settings for config project.
 """
 
 from pathlib import Path
+from datetime import timedelta
+
+import dj_database_url
 from decouple import config
 
 
@@ -107,32 +110,12 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # ---------------------------------------------------------
 
-import dj_database_url
-
 DATABASES = {
     "default": dj_database_url.config(
         default=config("DATABASE_URL"),
         conn_max_age=600,
     )
 }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.mysql",
-#         "NAME": config("MYSQLDATABASE", default=config("DB_NAME")),
-#         "USER": config("MYSQLUSER", default=config("DB_USER")),
-#         "PASSWORD": config("MYSQLPASSWORD", default=config("DB_PASSWORD")),
-#         "HOST": config("MYSQLHOST", default=config("DB_HOST")),
-#         "PORT": config("MYSQLPORT", default=config("DB_PORT")),
-#     }
-# }
-
-# DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
 
 
 # ---------------------------------------------------------
@@ -212,8 +195,6 @@ REST_FRAMEWORK = {
 # JWT
 # ---------------------------------------------------------
 
-from datetime import timedelta
-
 SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=30),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=1),
@@ -232,6 +213,18 @@ SIMPLE_JWT = {
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
     "http://127.0.0.1:5173",
+    "https://rfqs-frontend.vercel.app",
+]
+
+
+# ---------------------------------------------------------
+# CSRF
+# ---------------------------------------------------------
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+    "https://rfqs-frontend.vercel.app",
 ]
 
 
