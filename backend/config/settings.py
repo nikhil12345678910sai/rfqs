@@ -107,16 +107,25 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # ---------------------------------------------------------
 
+import dj_database_url
+
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.mysql",
-        "NAME": config("MYSQLDATABASE", default=config("DB_NAME")),
-        "USER": config("MYSQLUSER", default=config("DB_USER")),
-        "PASSWORD": config("MYSQLPASSWORD", default=config("DB_PASSWORD")),
-        "HOST": config("MYSQLHOST", default=config("DB_HOST")),
-        "PORT": config("MYSQLPORT", default=config("DB_PORT")),
-    }
+    "default": dj_database_url.config(
+        default=config("DATABASE_URL"),
+        conn_max_age=600,
+    )
 }
+
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.mysql",
+#         "NAME": config("MYSQLDATABASE", default=config("DB_NAME")),
+#         "USER": config("MYSQLUSER", default=config("DB_USER")),
+#         "PASSWORD": config("MYSQLPASSWORD", default=config("DB_PASSWORD")),
+#         "HOST": config("MYSQLHOST", default=config("DB_HOST")),
+#         "PORT": config("MYSQLPORT", default=config("DB_PORT")),
+#     }
+# }
 
 # DATABASES = {
 #     "default": {
